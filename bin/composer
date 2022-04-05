@@ -1,0 +1,4 @@
+#!/bin/bash
+#
+# Executes bash
+docker-compose exec -u 1000 php composer $@

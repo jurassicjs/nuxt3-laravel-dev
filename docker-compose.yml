@@ -1,0 +1,68 @@
+version: "3.6"
+services:
+  nginx:
+    image: nginx:1.15
+    working_dir: /var/www/html
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./apps/api:/var/www/html/api
+      - ./apps/nuxt-app:/var/www/html/nuxt-app
+      - ./config/ssl:/etc/ssl:ro
+      - ./config/nginx/auth:/etc/nginx/auth
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/sites-dev:/etc/nginx/sites-enabled
+
+  php:
+    build: ./config/php
+    working_dir: /var/www/html/api
+    volumes:
+      - ./apps/api:/var/www/html/api
+      - ./config/php/xdebug-linux.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data/schema.sql:/docker-entrypoint-initdb.d
+      - mysqldata:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - "6379:6379"
+
+  nuxt-app:
+    ports:
+      - "3000:80"
+      - "24678:24678"
+    build:
+      dockerfile: Dockerfile
+      context: ./config/nuxt-app
+    working_dir: /var/www/html/nuxt-app
+    user: node
+    volumes:
+      - ./apps/nuxt-app:/var/www/html/nuxt-app
+    environment:
+      API_BASE_URL: https://www.jurassicjs.eu/api
+      BASE_URL: https://my.jurassicjs.eu
+      NODE_ENV: dev
+    command: sh -c "npm i && npm run dev"
+    stdin_open: true
+    tty: true
+    networks:
+      - default
+
+volumes:
+  mysqldata:
+    driver: local

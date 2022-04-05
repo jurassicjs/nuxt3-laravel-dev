@@ -1,0 +1,11 @@
+[
+  {
+    "name": "prod-server",
+    "ip": "",
+    "username": "root",
+    "port": "22",
+    "beforeHooks": "",
+    "afterHooks": "",
+    "path": "/var/www/html"
+  }
+]

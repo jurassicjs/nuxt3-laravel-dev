@@ -1,0 +1,6 @@
+/nuxt-app*
+.idea*
+/data
+apps/l9/packages
+apps/l9/vendor
+apps/client/node_modules
