@@ -9,11 +9,12 @@ const config: RuntimeConfig = useRuntimeConfig();
 const orderId = 12345
 
 const {data: count} = await useAsyncData('count', () => $fetch('/api/count'))
+const route = useRoute()
 
 let {data}  =  useAsyncData(
   'order',
   (): Promise<IOrderResponse> => $fetch(
-    `${config.CUSTOM_API_URL}/order/server-boss/23432/find`),
+    `${config.CUSTOM_API_URL}/order/${route.params.id}/find`),
   {server: false}
 )
 
@@ -25,8 +26,9 @@ const action = async function (url: string, method: string) {
   <navbar/>
   <div class="h-48">
   </div>
-  <span class="block text-indigo-600">Status: {{ config.CUSTOM_API_URL}}</span>
-  <span class="block text-indigo-600">TEST: {{ config.TEST_URL}}</span>
+<!--  <span class="block text-indigo-600">Status: {{ route}}</span>-->
+<!--  <span class="block text-indigo-600">Status: {{ config.CUSTOM_API_URL}}</span>-->
+<!--  <span class="block text-indigo-600">TEST: {{ config.TEST_URL}}</span>-->
   <div class="bg-gray-50" v-if="data">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
       <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">

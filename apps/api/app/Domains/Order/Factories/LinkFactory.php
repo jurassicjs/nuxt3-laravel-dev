@@ -18,9 +18,9 @@ class LinkFactory
     public function attachLinks(Order $order): Order
     {
         $apiBaseUrl = env('API_BASE_URL');
-        $payUrl = "$apiBaseUrl/order/server-boss/$order->id/pay";
-        $cancelUrl = "$apiBaseUrl/order/server-boss/$order->id/cancel";
-        $rebateUrl = "$apiBaseUrl/order/server-boss/$order->id/rebate";
+        $payUrl = "$apiBaseUrl/order/$order->id/pay";
+        $cancelUrl = "$apiBaseUrl/order/$order->id/cancel";
+        $rebateUrl = "$apiBaseUrl/order/$order->id/rebate";
         $method = HttpMethod::POST;
 
         $isManager = true;
