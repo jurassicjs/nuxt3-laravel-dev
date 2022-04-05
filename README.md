@@ -39,11 +39,11 @@ config/nginx/sites-dev/jurassicjs.eu/.conf
 ```
 The default is:
 
->jurassicjs.eu
+>dev.jurassicjs.eu
 
 /etc/hosts should have an entry that looks like this:
 ```dotenv
-127.0.0.1  jurassicjs.eu
+127.0.0.1  dev.jurassicjs.eu my.dev.jurassicjs.eu
 ```
 > I don't know anything about windows.
 > If you're on a windows machine, and you know what to do in this instance,
