@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {ref} from "@vue/reactivity";
 import {RuntimeConfig} from "@nuxt/schema";
-import {useCookie, useRuntimeConfig, } from "#app";
+import {useCookie, useRuntimeConfig, useState,} from "#app";
 import {IUser} from "~/types/IUser";
 import {IOrderResponse} from "~/types/order";
+import {useAsyncData} from "nuxt3/app";
 
 
 const config: RuntimeConfig = useRuntimeConfig();
@@ -13,33 +14,29 @@ const passwordConfirmation = ref(null)
 const name = ref(null)
 let csrfCookie = useCookie('XSRF-TOKEN')
 const loggedInUser = () => useState<IUser>('loggedInUser', null)
+const registerUrl = `${config.CUSTOM_API_URL}/register_user`
+const requestBody =  JSON.stringify({name: name.value, email: email.value, password: password.value, password_confirmation: passwordConfirmation.value})
+
+function postRegisterForm() {
+  registerUser<IUser>().then(user => {
+    debugger
+  })
+}
 
 
-async function registerUser() {
-  const register = await fetch(`${config.CUSTOM_API_URL}/register_user`, {
+async function registerUser<TResponse>(): Promise<TResponse> {
+  return await fetch(`${config.CUSTOM_API_URL}/register_user`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'X-XSRF-TOKEN': csrfCookie.value,
       'XDEBUG_SESSION': 'PHPSTORM'
     },
-    body: JSON.stringify({name: name.value, email: email.value, password: password.value, password_confirmation: passwordConfirmation.value})
-  }).then((response) => {
-    type JSONResponse = {
-      data?: {
-        user: Omit<IUser, 'created_at'>
-      }
-      errors?: Array<{message: string}>
-    }
-
-    const {data, errors}: JSONResponse = response.json()
-
+    body:  JSON.stringify({name: name.value, email: email.value, password: password.value, password_confirmation: passwordConfirmation.value})
   })
+    .then(data => data.json())
+    .then((data) => data as TResponse);
 }
-
-
-
-
 
 </script>
 
@@ -123,7 +120,7 @@ export default {
         </div>
 
         <div>
-          <button @click="registerUser"
+          <button @click="postRegisterForm"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             <!-- Heroicon name: solid/lock-closed -->
