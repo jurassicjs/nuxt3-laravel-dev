@@ -4,11 +4,10 @@ import ActionButton from "~/components/elements/ActionButton.vue";
 import {useState} from "#app";
 import YouAreHere from "~/components/elements/YouAreHere.vue";
 import {useStorage} from "@vueuse/core";
-const testState = useState('testState', () => 'initial value is set')
+const testState = useStorage('testState', null)
 
 function updateTestState() {
-  testState.value = 'persistent updated value is now set'
-  useStorage('testState', testState.value).value = testState.value
+  testState.value = 'persistent value set'
 }
 
 </script>
@@ -18,10 +17,7 @@ function updateTestState() {
     <div class="h-48">
     </div>
 
-    <div class="bg-gray-50">
-      <YouAreHere/>
-    </div>
-
+    <YouAreHere/>
 
     <div class="bg-gray-50">
       <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">

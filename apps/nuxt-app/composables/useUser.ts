@@ -1,22 +1,28 @@
-import {RuntimeConfig} from "@nuxt/schema";
-import {useCookie, useFetch, useRuntimeConfig} from "#app";
+import {useStorage} from "@vueuse/core";
+import {useRouter, useState} from "#app";
+import {computed} from "@vue/reactivity";
 
-const config: RuntimeConfig = useRuntimeConfig();
-let csrfCookie = useCookie('XSRF-TOKEN')
+export const useLoggedIn = () => {
 
-export const registerUser = <TResponse>(requestBody: BodyInit) => {
-  return async function registerUser<TResponse>(requestBody: BodyInit): Promise<TResponse> {
-    return await useFetch(`${config.CUSTOM_API_URL}/register_user`, {
-      server:false,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-XSRF-TOKEN': csrfCookie.value,
-        'XDEBUG_SESSION': 'PHPSTORM'
-      },
-      body:  requestBody
+  return {
+    user: computed(() => {
+
+      debugger
+      const stateUser = useState('loggedInUser')
+
+      if (stateUser.value !== undefined) {
+        return stateUser
+      }
+
+      const localStorageUser =  useStorage('loggedInUser', null)
+
+      if (localStorageUser.value) {
+        return localStorageUser
+      }
+
+      const router = useRouter()
+
+      router.push('/')
     })
-      .then(data => data)
-      .then((data) => data as TResponse);
   }
 }

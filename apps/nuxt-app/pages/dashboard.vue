@@ -4,11 +4,13 @@ import ActionButton from "~/components/elements/ActionButton.vue";
 import {useState} from "#app";
 import YouAreHere from "~/components/elements/YouAreHere.vue";
 import { useStorage } from '@vueuse/core'
+import {useLoggedIn} from "~/composables/useUser";
 
 const state = useStorage('my-store', { hello: 'hi', greeting: 'Hello' })
 
+const {user} = useLoggedIn()
 
-const testState = useState('testState')
+const testState = useStorage('testState', '')
 
 function updateTestState() {
   testState.value = 'dashboard updated value is now set'
@@ -23,6 +25,10 @@ function updateTestState() {
 
 
     <YouAreHere/>
+
+    <div v-if="user">
+      {{user}}
+    </div>
 
 
     <div class="bg-gray-50">
