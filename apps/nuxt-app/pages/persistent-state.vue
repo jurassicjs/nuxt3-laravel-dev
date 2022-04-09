@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import Navbar from "~/components/layout/navbar.vue";
 import ActionButton from "~/components/elements/ActionButton.vue";
-import {useState} from "#app";
 import YouAreHere from "~/components/elements/YouAreHere.vue";
-import {useStorage} from "@vueuse/core";
-const testState = useStorage('testState', null)
+import {useStorage} from '@vueuse/core'
+import {useLoggedIn} from "~/composables/useLoggedIn";
+
+const newStateValue = ref('')
+const {user} = useLoggedIn()
+const testState = useStorage('testState', '')
 
 function updateTestState() {
-  testState.value = 'persistent value set'
+  testState.value = newStateValue.value
 }
 
 </script>
@@ -22,9 +25,17 @@ function updateTestState() {
     <div class="bg-gray-50">
       <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
         <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span class="block text-indigo-600">Test State Is: {{ testState }}</span>
+          <span class="block text-indigo-600">TestState Is: {{ testState }}</span>
         </h2>
-        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      </div>
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 place-content-center grid-rows-1 grid">
+        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <input v-model="newStateValue"
+                 class=" border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text"
+                 placeholder="enter new state value" aria-label="state value">
+        </h2>
+
+        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0 mt-5">
           <ActionButton
             actionClasses="bg-emerald-600"
             title="Update State"
@@ -35,5 +46,4 @@ function updateTestState() {
       </div>
     </div>
   </div>
-
 </template>

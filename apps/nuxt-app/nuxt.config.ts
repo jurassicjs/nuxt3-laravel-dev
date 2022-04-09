@@ -12,6 +12,13 @@ export default defineNuxtConfig({
     postcss: {
       postcssOptions: require('./postcss.config.js'),
     },
+    additionalExtensions: {
+      extend(config, ctx) {
+        if (ctx.isDev) {
+          config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+        }
+      }
+    }
   },
   publicRuntimeConfig: {
     CUSTOM_API_URL: apiUrl,

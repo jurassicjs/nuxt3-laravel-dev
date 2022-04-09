@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import {ref} from "@vue/reactivity";
 import {RuntimeConfig} from "@nuxt/schema";
-import {useCookie, useFetch, useRuntimeConfig, useState,} from "#app";
+import {useCookie, useFetch, useRouter, useRuntimeConfig, useState,} from "#app";
 import {IUser} from "~/types/IUser";
-import {IOrderResponse} from "~/types/order";
-import {useAsyncData} from "nuxt3/app";
 import Navbar from "~/components/layout/navbar.vue";
 import {useStorage} from "@vueuse/core";
-// import {registerUser} from "~/composables/useUser";
 
+const router = useRouter()
 const config: RuntimeConfig = useRuntimeConfig();
 const email = ref(null)
 const password = ref(null)
@@ -16,16 +14,13 @@ const passwordConfirmation = ref(null)
 const name = ref(null)
 let csrfCookie = useCookie('XSRF-TOKEN')
 const loggedInUser = () => useState<IUser | null>('loggedInUser', () => null)
-
-const registerUrl = `${config.CUSTOM_API_URL}/auth/register`
-const requestBody =  JSON.stringify({name: name.value, email: email.value, password: password.value, password_confirmation: passwordConfirmation.value})
-
 const testState = useState('testState', () => 'initial value is set')
 
 function postRegisterForm() {
   registerUser<IUser>().then(user => {
     useState('loggedInUser').value = user
     useStorage('loggedInUser', user)
+    router.push('/dashboard')
   })
 }
 
@@ -39,10 +34,6 @@ const { data: csrfResponse, error: csrfError } = await useFetch(
     credentials: 'include'
   }
 )
-
-function updateTestState() {
-  testState.value = 'updated value is now set'
-}
 
 async function registerUser<TResponse>(): Promise<TResponse> {
   return await fetch(`${config.CUSTOM_API_URL}/auth/register`, {
@@ -59,24 +50,6 @@ async function registerUser<TResponse>(): Promise<TResponse> {
 }
 
 </script>
-
-<!--<script lang="ts">-->
-<!--export default {-->
-<!--  mounted() {-->
-<!--    fetch(`https://dev.jurassicjs.eu/api/v1/csrf-cookie`, {-->
-<!--      method: 'GET',-->
-<!--      mode: 'cors',-->
-<!--      headers: {'Content-Type': 'application/json'},-->
-<!--      credentials: 'include'-->
-<!--    }).then(res => {-->
-
-<!--      console.log('testing ......')-->
-<!--    }).catch(err => {-->
-
-<!--    })-->
-<!--  }-->
-<!--}-->
-<!--</script>-->
 
 <template>
   <div>
