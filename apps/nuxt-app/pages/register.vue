@@ -5,7 +5,7 @@ import {useCookie, useFetch, useRuntimeConfig, useState,} from "#app";
 import {IUser} from "~/types/IUser";
 import {IOrderResponse} from "~/types/order";
 import {useAsyncData} from "nuxt3/app";
-
+// import {registerUser} from "~/composables/useUser";
 
 const config: RuntimeConfig = useRuntimeConfig();
 const email = ref(null)
@@ -13,13 +13,14 @@ const password = ref(null)
 const passwordConfirmation = ref(null)
 const name = ref(null)
 let csrfCookie = useCookie('XSRF-TOKEN')
-const loggedInUser = () => useState<IUser>('loggedInUser', null)
+const loggedInUser = () => useState<IUser | null>('loggedInUser', () => null)
+
 const registerUrl = `${config.CUSTOM_API_URL}/register_user`
 const requestBody =  JSON.stringify({name: name.value, email: email.value, password: password.value, password_confirmation: passwordConfirmation.value})
 
 function postRegisterForm() {
   registerUser<IUser>().then(user => {
-    debugger
+    useState('loggedInUser').value = user
   })
 }
 
@@ -33,7 +34,6 @@ const { data: csrfResponse, error: csrfError } = await useFetch(
     credentials: 'include'
   }
 )
-
 
 async function registerUser<TResponse>(): Promise<TResponse> {
   return await fetch(`${config.CUSTOM_API_URL}/register_user`, {
