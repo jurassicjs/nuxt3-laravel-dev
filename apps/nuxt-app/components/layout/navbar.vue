@@ -54,8 +54,16 @@
            <solution-drop/>
           </div>
 
-          <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900"> Pricing </a>
-          <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900"> Docs </a>
+          <nuxt-link to="/non-persistent-state" >
+            <span class="text-base font-medium text-gray-500 hover:text-gray-900">
+                Non Persistence
+            </span>
+          </nuxt-link>
+          <nuxt-link to="/dashboard" >
+            <span class="text-base font-medium text-gray-500 hover:text-gray-900">
+                Dashoard
+            </span>
+          </nuxt-link>
 
           <div class="relative">
             <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
