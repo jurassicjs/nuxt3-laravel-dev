@@ -17,7 +17,7 @@ const name = ref(null)
 let csrfCookie = useCookie('XSRF-TOKEN')
 const loggedInUser = () => useState<IUser | null>('loggedInUser', () => null)
 
-const registerUrl = `${config.CUSTOM_API_URL}/register_user`
+const registerUrl = `${config.CUSTOM_API_URL}/auth/register`
 const requestBody =  JSON.stringify({name: name.value, email: email.value, password: password.value, password_confirmation: passwordConfirmation.value})
 
 const testState = useState('testState', () => 'initial value is set')
@@ -45,7 +45,7 @@ function updateTestState() {
 }
 
 async function registerUser<TResponse>(): Promise<TResponse> {
-  return await fetch(`${config.CUSTOM_API_URL}/register_user`, {
+  return await fetch(`${config.CUSTOM_API_URL}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
