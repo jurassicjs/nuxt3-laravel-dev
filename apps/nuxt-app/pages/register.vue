@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "@vue/reactivity";
 import {RuntimeConfig} from "@nuxt/schema";
-import {useCookie, useRuntimeConfig, useState,} from "#app";
+import {useCookie, useFetch, useRuntimeConfig, useState,} from "#app";
 import {IUser} from "~/types/IUser";
 import {IOrderResponse} from "~/types/order";
 import {useAsyncData} from "nuxt3/app";
@@ -23,6 +23,17 @@ function postRegisterForm() {
   })
 }
 
+const { data: csrfResponse, error: csrfError } = await useFetch(
+  `https://dev.jurassicjs.eu/api/v1/csrf-cookie`,
+  {
+    server: false,
+    method: 'GET',
+    mode: 'cors',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include'
+  }
+)
+
 
 async function registerUser<TResponse>(): Promise<TResponse> {
   return await fetch(`${config.CUSTOM_API_URL}/register_user`, {
@@ -40,29 +51,23 @@ async function registerUser<TResponse>(): Promise<TResponse> {
 
 </script>
 
-<script lang="ts">
-export default {
-  mounted() {
-    fetch(`https://dev.jurassicjs.eu/api/v1/csrf-cookie`, {
-      method: 'GET',
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'},
-      credentials: 'include'
-    }).then(res => {
+<!--<script lang="ts">-->
+<!--export default {-->
+<!--  mounted() {-->
+<!--    fetch(`https://dev.jurassicjs.eu/api/v1/csrf-cookie`, {-->
+<!--      method: 'GET',-->
+<!--      mode: 'cors',-->
+<!--      headers: {'Content-Type': 'application/json'},-->
+<!--      credentials: 'include'-->
+<!--    }).then(res => {-->
 
-      console.log('testing ......')
-    }).catch(err => {
+<!--      console.log('testing ......')-->
+<!--    }).catch(err => {-->
 
-    })
-  },
-
-  setup() {
-    let csrfCookie = useCookie('XSRF-TOKEN')
-    console.log('cooker is: csrfCookie')
-
-  }
-}
-</script>
+<!--    })-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
 
 <template>
   <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
