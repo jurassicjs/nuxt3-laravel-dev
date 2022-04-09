@@ -3,6 +3,10 @@ import Navbar from "~/components/layout/navbar.vue";
 import ActionButton from "~/components/elements/ActionButton.vue";
 import {useState} from "#app";
 import YouAreHere from "~/components/elements/YouAreHere.vue";
+import { useStorage } from '@vueuse/core'
+
+const state = useStorage('my-store', { hello: 'hi', greeting: 'Hello' })
+
 
 const testState = useState('testState')
 
