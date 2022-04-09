@@ -1,31 +1,30 @@
 <script setup lang="ts">
 import {ref} from "@vue/reactivity";
 import {RuntimeConfig} from "@nuxt/schema";
-import {useCookie, useFetch, useRuntimeConfig, useState,} from "#app";
+import {useCookie, useFetch, useRouter, useRuntimeConfig, useState,} from "#app";
 import {IUser} from "~/types/IUser";
-import {IOrderResponse} from "~/types/order";
-import {useAsyncData} from "nuxt3/app";
 import Navbar from "~/components/layout/navbar.vue";
 import {useStorage} from "@vueuse/core";
-// import {registerUser} from "~/composables/useUser";
 
 const config: RuntimeConfig = useRuntimeConfig();
 const email = ref(null)
 const password = ref(null)
-const passwordConfirmation = ref(null)
-const name = ref(null)
-let csrfCookie = useCookie('XSRF-TOKEN')
+const router = useRouter()
+
+const csrfCookie = useCookie('XSRF-TOKEN')
 const loggedInUser = () => useState<IUser | null>('loggedInUser', () => null)
 const testState = useState('testState', () => 'initial value is set')
 
-function postRegisterForm() {
-  registerUser<IUser>().then(user => {
+function postLoginForm() {
+login<IUser>().then(user => {
     useState('loggedInUser').value = user
     useStorage('loggedInUser', user)
+  debugger
+    router.push('/dashboard')
   })
 }
 
-const { data: csrfResponse, error: csrfError } = await useFetch(
+const {data: csrfResponse, error: csrfError} = await useFetch(
   `https://dev.jurassicjs.eu/api/v1/csrf-cookie`,
   {
     server: false,
@@ -40,7 +39,7 @@ function updateTestState() {
   testState.value = 'updated value is now set'
 }
 
-async function registerUser<TResponse>(): Promise<TResponse> {
+async function login<TResponse>(): Promise<TResponse> {
   return await fetch(`${config.CUSTOM_API_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -48,31 +47,13 @@ async function registerUser<TResponse>(): Promise<TResponse> {
       'X-XSRF-TOKEN': csrfCookie.value,
       'XDEBUG_SESSION': 'PHPSTORM'
     },
-    body:  JSON.stringify({email: email.value, password: password.value})
+    body: JSON.stringify({email: email.value, password: password.value})
   })
     .then(data => data.json())
     .then((data) => data as TResponse);
 }
 
 </script>
-
-<!--<script lang="ts">-->
-<!--export default {-->
-<!--  mounted() {-->
-<!--    fetch(`https://dev.jurassicjs.eu/api/v1/csrf-cookie`, {-->
-<!--      method: 'GET',-->
-<!--      mode: 'cors',-->
-<!--      headers: {'Content-Type': 'application/json'},-->
-<!--      credentials: 'include'-->
-<!--    }).then(res => {-->
-
-<!--      console.log('testing ......')-->
-<!--    }).catch(err => {-->
-
-<!--    })-->
-<!--  }-->
-<!--}-->
-<!--</script>-->
 
 <template>
   <div>
@@ -82,7 +63,7 @@ async function registerUser<TResponse>(): Promise<TResponse> {
         <div>
           <div class="h-25 w-25">
           </div>
-          <img class="mx-auto h-24 w-auto" src="~/public/img/logo_clear.png" alt="full stack jack logo" />
+          <img class="mx-auto h-24 w-auto" src="~/public/img/logo_clear.png" alt="full stack jack logo"/>
           <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
           <p class="mt-2 text-center text-sm text-gray-600">
           </p>
@@ -118,7 +99,7 @@ async function registerUser<TResponse>(): Promise<TResponse> {
           </div>
 
           <div>
-            <button @click="postRegisterForm"
+            <button @click="postLoginForm"
                     class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             <!-- Heroicon name: solid/lock-closed -->

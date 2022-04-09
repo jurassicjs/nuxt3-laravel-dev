@@ -2,9 +2,7 @@
 
 namespace App\Domains\Auth\Http\Controllers;
 
-use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -35,7 +33,6 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-
         event(new Registered($user));
 
         Auth::login($user);
@@ -43,16 +40,12 @@ class AuthController extends Controller
         return response()->json($user);
     }
 
-    /**
-     * @throws ValidationException
-     */
     public function login(Request $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            return response()->json($user);
+            return response()->json(Auth::user());
         }
 
         return response()->json('authentication failed', 401);
