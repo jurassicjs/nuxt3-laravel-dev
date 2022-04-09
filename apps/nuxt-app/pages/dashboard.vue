@@ -4,7 +4,15 @@ import ActionButton from "~/components/elements/ActionButton.vue";
 import {useState} from "#app";
 import YouAreHere from "~/components/elements/YouAreHere.vue";
 import { useStorage } from '@vueuse/core'
-import {useLoggedIn} from "~/composables/useUser";
+import {useLoggedIn} from "~/composables/useLoggedIn";
+import {IUser} from "~/types/IUser";
+// import {definePageMeta} from "nuxt3/dist/pages/runtime";
+
+
+definePageMeta({
+  middleware: ["auth"]
+
+})
 
 const state = useStorage('my-store', { hello: 'hi', greeting: 'Hello' })
 
@@ -27,7 +35,7 @@ function updateTestState() {
     <YouAreHere/>
 
     <div v-if="user">
-      {{user}}
+      {{user.name}}
     </div>
 
 

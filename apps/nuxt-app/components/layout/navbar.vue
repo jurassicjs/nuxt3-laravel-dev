@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import {useUserMedia} from "@vueuse/core";
+import {useLoggedIn} from "~/composables/useLoggedIn";
+import {useAsyncData} from "nuxt3/app";
+import {IUser} from "~/types/IUser";
+
+
+const {user} = useLoggedIn()
+
+function logout() {
+  const {logout} = useLoggedIn()
+  logout()
+}
+
+</script>
+
 <template>
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="relative bg-white">
@@ -6,7 +22,7 @@
         <div class="flex justify-start lg:w-0 lg:flex-1">
           <a href="#">
             <span class="sr-only">Workflow</span>
-            <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
+            <img class="h-24 w-auto sm:h-10" src="~/public/img/logo_clear.png"/>
           </a>
         </div>
         <div class="-mr-2 -my-2 md:hidden">
@@ -24,17 +40,17 @@
         <nav class="hidden md:flex space-x-10">
 
 
-          <nuxt-link to="/persistent-state" >
+          <nuxt-link to="/persistent-state">
             <span class="text-base font-medium text-gray-500 hover:text-gray-900">
               Persistence
             </span>
           </nuxt-link>
-          <nuxt-link to="/non-persistent-state" >
+          <nuxt-link to="/non-persistent-state">
             <span class="text-base font-medium text-gray-500 hover:text-gray-900">
                 Non Persistence
             </span>
           </nuxt-link>
-          <nuxt-link to="/dashboard" >
+          <nuxt-link to="/dashboard">
             <span class="text-base font-medium text-gray-500 hover:text-gray-900">
                 Dashoard
             </span>
@@ -72,12 +88,26 @@
             <float-drop/>
           </div>
         </nav>
-        <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <a href="#" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Sign in </a>
-          <a href="#"
-             class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-            Sign up </a>
+        <div v-if="!user" class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+          <nuxt-link to="/login" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Sign
+            in
+          </nuxt-link>
+          <nuxt-link to="/register"
+                     class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+            Sign up
+          </nuxt-link>
         </div>
+        <div v-else class="d-flex">
+          <div class="mr-3">
+            {{ user.name }}
+          </div>
+          <span @click="logout"
+                class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+          logout
+          </span>
+
+        </div>
+
       </div>
     </div>
 
@@ -193,9 +223,10 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 import FloatDrop from "~/components/layout/float-drop";
 import SolutionDrop from "~/components/layout/solution-drop";
+
 export default {
   components: {SolutionDrop, FloatDrop}
 }

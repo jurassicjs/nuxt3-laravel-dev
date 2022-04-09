@@ -22,7 +22,6 @@ export default defineNuxtConfig({
     port: 3000
   },
   modules: [
-    '@vueuse/nuxt',
   ],
   buildModules: [
     // ...
