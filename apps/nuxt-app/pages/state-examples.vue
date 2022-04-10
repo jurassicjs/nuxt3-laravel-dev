@@ -2,7 +2,8 @@
 import Navbar from "~/components/layout/navbar.vue";
 import YouAreHere from "~/components/elements/YouAreHere.vue";
 import VModelExample from "~/components/elements/VModelExample.vue";
-import DynamicStateExample from "~/components/elements/DynamicStateExample.vue";
+import UseStateExample from "~/components/elements/UseStateExample.vue";
+import UseStorageExample from "~/components/elements/UseStorageExample.vue";
 
 </script>
 <script lang="ts">
@@ -23,7 +24,9 @@ export default {
 
     <VModelExample/>
 
-    <DynamicStateExample/>
+    <UseStateExample/>
+
+    <UseStorageExample/>
 
   </div>
 </template>
