@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const newStateValue = ref('')
+const newStateValue = ref(null)
 
 </script>
 
@@ -10,9 +10,10 @@ const newStateValue = ref('')
       <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 place-content-center grid-rows-1 grid">
         <h2 class="text-3xl font-extrabold tracking-tight text-black-900 sm:text-4xl">
           <div class=" text-lg text-indigo-600">v-model example (dynamic)</div>
-          <div class=" text-orange-600 mb-5 py-20">Test State Is: <span class="text-green-600">{{
-              newStateValue
-            }}</span></div>
+          <div class=" text-orange-600 mb-5 py-20">State Is:
+            <span class="text-green-600">
+              {{newStateValue }}
+              <span v-if="newStateValue == null">null</span></span></div>
 
 
           <input v-model="newStateValue"
