@@ -71,7 +71,7 @@ async function registerUser<TResponse>(): Promise<TResponse> {
           <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">Learn Nuxt 3 By
             Example</p>
           <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto"><a href="https://github.com/jurassicjs">Thanks for
-            checking out this Jurassic Js Project</a></p>
+            checking out this Jurassic Js / PhpSquad Project</a></p>
         </div>
 
 
@@ -110,20 +110,18 @@ async function registerUser<TResponse>(): Promise<TResponse> {
             </div>
 
 
-            <nuxt-link to="/persistent-state">
+            <nuxt-link to="/up-next">
             <div class="relative">
               <dt>
                 <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                       stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round"
-                          d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Persistence</p>
+                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">up next</p>
               </dt>
               <dd class="mt-2 ml-16 text-base text-gray-500">
-                An example of how to persist data in you nuxt application
+                middleware
               </dd>
             </div>
             </nuxt-link>
@@ -132,9 +130,8 @@ async function registerUser<TResponse>(): Promise<TResponse> {
             <div class="relative">
               <dt>
                 <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                       stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                   </svg>
                 </div>
                 <p class="ml-16 text-lg leading-6 font-medium text-gray-900">State</p>
@@ -155,7 +152,7 @@ async function registerUser<TResponse>(): Promise<TResponse> {
                           d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
                   </svg>
                 </div>
-                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">What's Next</p>
+                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">video requests</p>
               </dt>
               <dd class="mt-2 ml-16 text-base text-gray-500">
                 Let me know what topics you'd like me to make videos for.
