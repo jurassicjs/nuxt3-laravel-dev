@@ -14,6 +14,17 @@ function updateTestState() {
 }
 
 </script>
+<script lang="ts">
+import Prism from '~/plugins/prism'
+
+export default {
+  mounted() {
+    Prism.highlightAll()
+  }
+}
+</script>
+
+
 <template>
   <div>
     <navbar/>
@@ -44,5 +55,22 @@ function updateTestState() {
         </div>
       </div>
     </div>
+
+    <div class="flex justify-center">
+      <pre>
+        <code class="language-javascript">
+import {useState} from "#app";
+
+const newStateValue = ref('')
+
+const testState = useState('testState', () => 'unset')
+
+function updateTestState() {
+  testState.value = newStateValue.value
+}
+      </code>
+      </pre>
+    </div>
+
   </div>
 </template>

@@ -45,5 +45,22 @@ function updateTestState() {
         </div>
       </div>
     </div>
+    <div class="flex justify-center">
+      <pre>
+        <code class="language-javascript">
+import {useStorage} from '@vueuse/core'
+
+const newStateValue = ref('')
+
+const testState = useStorage('testState', '')
+
+function updateTestState() {
+  testState.value = newStateValue.value
+}
+      </code>
+      </pre>
+    </div>
+
   </div>
+
 </template>
