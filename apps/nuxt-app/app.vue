@@ -2,7 +2,7 @@
 import '@/assets/css/tailwind.css'
 </script>
 <template>
-  <div>
+  <div class="min-h-screen">
     <NuxtPage />
   </div>
 </template>

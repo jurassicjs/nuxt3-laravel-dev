@@ -45,7 +45,7 @@ function logout() {
               Persistence
             </span>
           </nuxt-link>
-          <nuxt-link to="/non-persistent-state">
+          <nuxt-link to="state-examples">
             <span class="text-base font-medium text-gray-500 hover:text-gray-900">
                 Non Persistence
             </span>

@@ -128,7 +128,7 @@ async function registerUser<TResponse>(): Promise<TResponse> {
             </div>
             </nuxt-link>
 
-            <nuxt-link to="/non-persistent-state">
+            <nuxt-link to="/state-examples">
             <div class="relative">
               <dt>
                 <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
@@ -137,10 +137,10 @@ async function registerUser<TResponse>(): Promise<TResponse> {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </div>
-                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Non Persistent State</p>
+                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">State</p>
               </dt>
               <dd class="mt-2 ml-16 text-base text-gray-500">
-                An example of how to create that does not survive a refresh
+                See some examples of different state types
               </dd>
             </div>
             </nuxt-link>
