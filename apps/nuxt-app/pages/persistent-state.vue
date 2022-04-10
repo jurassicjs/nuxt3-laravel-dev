@@ -38,7 +38,7 @@ function updateTestState() {
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0 mt-5">
           <ActionButton
             actionClasses="bg-emerald-600"
-            title="Update State"
+            title="Update persistent State"
             action-link="fake"
             @action="updateTestState"
           />

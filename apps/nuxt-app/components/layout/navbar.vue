@@ -20,10 +20,10 @@ function logout() {
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
         <div class="flex justify-start lg:w-0 lg:flex-1">
-          <a href="#">
+          <nuxt-link to="/">
             <span class="sr-only">Workflow</span>
-            <img class="h-24 w-auto sm:h-10" src="~/public/img/logo_clear.png"/>
-          </a>
+              <img class="h-24 w-auto sm:h-10" src="~/public/img/logo_clear.png"/>
+            </nuxt-link>
         </div>
         <div class="-mr-2 -my-2 md:hidden">
           <button type="button"
@@ -52,41 +52,9 @@ function logout() {
           </nuxt-link>
           <nuxt-link to="/dashboard">
             <span class="text-base font-medium text-gray-500 hover:text-gray-900">
-                Dashoard
+                Dashboard
             </span>
           </nuxt-link>
-
-          <div class="relative">
-            <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
-            <button type="button"
-                    class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    aria-expanded="false">
-              <span>More</span>
-              <!--
-                Heroicon name: solid/chevron-down
-
-                Item active: "text-gray-600", Item inactive: "text-gray-400"
-              -->
-              <svg class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg"
-                   viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"/>
-              </svg>
-            </button>
-
-            <!--
-              'More' flyout menu, show/hide based on flyout menu state.
-
-              Entering: "transition ease-out duration-200"
-                From: "opacity-0 translate-y-1"
-                To: "opacity-100 translate-y-0"
-              Leaving: "transition ease-in duration-150"
-                From: "opacity-100 translate-y-0"
-                To: "opacity-0 translate-y-1"
-            -->
-            <float-drop/>
-          </div>
         </nav>
 
         <div v-if="user" class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
@@ -108,6 +76,10 @@ function logout() {
             Sign up
           </nuxt-link>
         </div>
+
+        <a href="https://github.com/jurassicjs/nuxt3-laravel-dev" target="_blank">
+          <img class="h-24 w-auto sm:h-10" src="~/public/img/github-logo.png"/>
+        </a>
 
       </div>
     </div>

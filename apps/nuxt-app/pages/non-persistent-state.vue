@@ -34,11 +34,10 @@ function updateTestState() {
                  class=" border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text"
                  placeholder="enter new state value" aria-label="state value">
         </h2>
-
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0 mt-5">
           <ActionButton
             actionClasses="bg-emerald-600"
-            title="Update State"
+            title="Update dynamic State"
             action-link="fake"
             @action="updateTestState"
           />
