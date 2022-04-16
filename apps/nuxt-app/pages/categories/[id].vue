@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import {RuntimeConfig} from "@nuxt/schema";
-import {useRuntimeConfig} from "nuxt3/app";
+import {useRoute, useRuntimeConfig} from "nuxt3/app";
 import Navbar from "~/components/layout/navbar.vue";
 import {IOrderResponse} from "~/types/order";
 import ActionButton from "~/components/elements/ActionButton.vue";
 
 const config: RuntimeConfig = useRuntimeConfig();
-const orderId = 12345
+const route = useRoute()
+const orderId = route.params.id
 
 const {data: count} = await useAsyncData('count', () => $fetch('/api/count'))
-const route = useRoute()
+
 
 let {data}  =  useAsyncData(
   'order',

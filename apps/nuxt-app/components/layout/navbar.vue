@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {useUserMedia} from "@vueuse/core";
 import {useLoggedIn} from "~/composables/useLoggedIn";
-import {useAsyncData} from "nuxt3/app";
-import {IUser} from "~/types/IUser";
-
 
 const {user} = useLoggedIn()
 
@@ -39,6 +35,11 @@ function logout() {
         </div>
         <nav class="hidden md:flex space-x-10">
 
+          <nuxt-link to="/served-by-nuxt">
+            <span class="text-base font-medium text-gray-500 hover:text-gray-900">
+              Served by Nuxt Api
+            </span>
+          </nuxt-link>
 
           <nuxt-link to="/state-examples">
             <span class="text-base font-medium text-gray-500 hover:text-gray-900">

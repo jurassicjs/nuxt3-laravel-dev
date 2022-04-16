@@ -4,3 +4,4 @@ export default () => {
   console.log('hit')
   return JSON.stringify(counter)
 }
+
