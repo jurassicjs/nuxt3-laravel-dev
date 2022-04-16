@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import {defineProps, PropType} from "@vue/runtime-core";
+import {ITag} from "~/types/ITag";
+
+defineProps({
+  tags: Array as PropType<Array<ITag>>
+})
 
 </script>
 
@@ -11,7 +17,7 @@
               <slot name="title"></slot>
             </p>
             <p tabindex="0" class="focus:outline-none text-sm leading-normal pt-2 text-gray-500 dark:text-gray-200 ">
-              36 up votes
+<!--              36 up votes-->
             </p>
           </div>
           <div role="img" aria-label="bookmark">
@@ -29,9 +35,9 @@
           <slot name="message"></slot>
         </p>
         <div tabindex="0" class="focus:outline-none flex">
-          <div class="py-2 px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">#nuxt3</div>
-          <div class="py-2 px-4 ml-3 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">#routing</div>
+          <nuxt-link :to="tag.link" v-for="tag in tags"  class="py-2 px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">
+            #{{ tag.title }}
+          </nuxt-link>
         </div>
       </div>
-
 </template>

@@ -2,14 +2,13 @@ let counter = 0
 export default () => {
   const rowSize = 2
   const categories = [
-    {title: 'Getting Started in Nuxt 3', message: 'setup a new Nuxt 3 project!'},
-    {title: 'Routing in Nuxt 3', message: 'learn Nuxt 3 routing from beginner to advanced!'},
-    {title: 'Templates in Nuxt 3', message: 'learn Nuxt 3 templates!'},
-    {title: 'Reativity Fundementals in Nuxt 3', message: 'learn Nuxt 3 Reativity!'},
-    {title: 'Composeables in Nuxt 3', message: 'learn Nuxt 3 composeables!'},
-    {title: 'Computed Properties in Nuxt 3', message: 'learn Nuxt 3 computed properties!'},
-    {title: 'Class Style and Bindings in Nuxt 3', message: 'learn Nuxt 3 Class Style and Bindings!'},
-    {title: 'List Rendering in Nuxt 3', message: 'learn Nuxt 3 List Rendering!'},
+    {title: 'Nuxt 3', message: 'Nuxt 3 for beginners course', image: '/public/nuxt3.svg', tags: [{title: 'Front End', link: '/frontend-courses'}]},
+    {title: 'Laravel', message: 'Laravel For beginners course', image: '/public/laravel.svg'},
+    {title: 'PHP', message: 'Ultimate PHP Course', image: '/public/php-logo.svg'},
+    {title: 'Nginx', message: 'Nginx Course for Beginners', image: '/public/nginx.svg'},
+    {title: 'Docker', message: 'Docker Course for Beginners', image: '/public/docker.svg'},
+    {title: 'Linux', message: 'Linux Course for Beginners', image: '/public/linux.svg'},
+
   ]
 
 
